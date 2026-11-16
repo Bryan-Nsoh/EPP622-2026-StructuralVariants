@@ -19,7 +19,7 @@ Project folder: `/lustre/isaac24/proj/UTK0505/bnsoh/test3`
 
 ## Setup
 
-Description: Create project folders and symlink test3 course data into `/data`. Specifically, trimmed Cherokee Brave HiFi reads and chr9 results from the lab for comparison.
+Description: Create project folders and symlink test3 course data into `data/`. Specifically, trimmed Cherokee Brave HiFi reads, the full Appalachian Spring reference genome, and chr9 results from the lab for comparison.
 
 ```bash
 #!/usr/bin/env bash
@@ -59,7 +59,7 @@ bash scripts/04_compare_chr9.sh > logs/04_compare_chr9.log 2>&1
 
 ### Commands
 
-Description: Use minimap2 to map the trimmed HiFi reads to all 11 chromosomes. Then obtain stats for the whole genome so we can compare with the mapping of chr9 alone.
+Description: Use minimap2 to map the trimmed HiFi reads to all 11 chromosomes. Then obtain stats for the whole genome and for chr9 by itself so we can compare with the lab's mapping of chr9 alone.
 
 ```bash
 #!/usr/bin/env bash
@@ -118,7 +118,7 @@ Coverage per chromosome: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/1_map
 
 ### Commands
 
-Description: Run cuteSV on the lab's HiFi settings to find structural variants between cherokee Brave and Appalachinan spring reference. 
+Description: Run cuteSV with the lab's HiFi settings to find structural variants between Cherokee Brave and the Appalachian Spring reference. 
 
 ```bash
 #!/usr/bin/env bash
