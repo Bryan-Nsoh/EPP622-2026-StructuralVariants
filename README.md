@@ -269,17 +269,17 @@ Output folder: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/4_chr9_comparis
 
 ### 1. Compare your minimap2 mapping stats from the lab (chromosome 9 only) against the whole-genome run. Which stats are red flags now that you have something to compare them to? Cite the actual numbers.
 
-Answer: 
+Answer: A big red flag is that 89.6% of reads mapped to chr9 in the lab even though chr9 is only 7.9% of the genome. When mapping reads to whole genome 7.8% of reads mapped to chr9, a much more sensible figure. Similar differences between chr9 only(lab) vs whole genome mapping are observed in read depth (182x vs 25.6x), error rate (12.35% vs 5.73%), MAPQ (36.4 vs 52.4) and non-primary alignments (6.2M vs 92k). These all present as evidence that reads from other chromosomes were forced onto chr9.
 
 
 ### 2. How many SV calls on chromosome 9 did we get in lab, and how many do you get on chromosome 9 when you map to the whole genome? Break the comparison down by SV type. How do you interpret the change?
 
-Answer:
+Answer: The lab called 30,095 SVs on chr9 while the whole genome called 6,077 (~80% fewer). Most lab calls were false as they were reads from other chromosomes which didn't fit chr9. DUP ($\downarrow$98%) and INV ($\downarrow$90%) dropped the most because repeated reads from other chromosomes stacked on one chr9 copy are mistaken as duplications. Likewise, pieces of misplaced reads that match nearby repeats in opposite directions are falsely labelled as inversions. BNDs were absend in the lab run but appear when reads can map across chromosomes.
 
 
 ### 3. This result is surprising. We normally map long reads to a complete reference, but can you think of a situation where you would only have a partial reference? Would this level of mismapping lead you to an incorrect conclusion in that situation?
 
-Answer:
+Answer: I can see a practical need to map long reads to a partial reference if we need to map onto a the genome of a related species, or an unfinished genome assembly. Here for instance the reference is one haplotype of a different cultivar (hap1 of appalachian spring) while the reads come from cherokee brave. Therefore sequences unique to cherokee brave may have nowhere to map onto the reference. This much mismapping is highly misleading. For example ~80% of the lab's SV calls disapeared with full genome mapping. Without full genome mapping it would me impossible to tell which calls are false. 
 
 
 ## Directory structure
