@@ -19,7 +19,7 @@ Project folder: `/lustre/isaac24/proj/UTK0505/bnsoh/test3`
 
 ## Setup
 
-Description:
+Description: Create project folders and symlink test3 course data into `/data`. Specifically, trimmed Cherokee Brave HiFi reads and chr9 results from the lab for comparison.
 
 ```bash
 #!/usr/bin/env bash
@@ -43,7 +43,7 @@ ln -sf $DATA/analyses/03_cutesv/CherBrave3.vcf data/lab_chr9_baseline/
 ln -sf $DATA/analyses/03_cutesv/CherBrave3.vcf.stats.txt data/lab_chr9_baseline/
 ```
 
-Run order, from the project folder:
+Order in which the scripts were run from the project folder:
 
 ```bash
 cd /lustre/isaac24/proj/UTK0505/bnsoh/test3
@@ -59,7 +59,7 @@ bash scripts/04_compare_chr9.sh > logs/04_compare_chr9.log 2>&1
 
 ### Commands
 
-Description:
+Description: Use minimap2 to map the trimmed HiFi reads to all 11 chromosomes. Then obtain stats for the whole genome so we can compare with the mapping of chr9 alone.
 
 ```bash
 #!/usr/bin/env bash
@@ -118,7 +118,7 @@ Coverage per chromosome: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/1_map
 
 ### Commands
 
-Description:
+Description: Run cuteSV on the lab's HiFi settings to find structural variants between cherokee Brave and Appalachinan spring reference. 
 
 ```bash
 #!/usr/bin/env bash
@@ -153,7 +153,7 @@ VCF: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/2_sv_calls/CherBrave3.wg.
 
 ### Commands
 
-Description:
+Description: Summarize SVs of each type and size for whole genome and for chr9 alone. 
 
 ```bash
 #!/usr/bin/env bash
@@ -200,7 +200,7 @@ Chromosome 9 only:
 
 ### Commands
 
-Description:
+Description: Show mapping stats, SV count by type and depth for both the lab results where reads could only map to chr9 and this run where reads could map to any chromosome so we can compare them.
 
 ```bash
 #!/usr/bin/env bash
@@ -269,7 +269,7 @@ Output folder: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/4_chr9_comparis
 
 ### 1. Compare your minimap2 mapping stats from the lab (chromosome 9 only) against the whole-genome run. Which stats are red flags now that you have something to compare them to? Cite the actual numbers.
 
-Answer:
+Answer: 
 
 
 ### 2. How many SV calls on chromosome 9 did we get in lab, and how many do you get on chromosome 9 when you map to the whole genome? Break the comparison down by SV type. How do you interpret the change?
