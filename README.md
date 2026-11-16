@@ -149,11 +149,11 @@ VCF: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/2_sv_calls/CherBrave3.wg.
 | Total | 77,345 |
 
 
-## Step 3: VCF Stats (SURVIVOR)
+## Step 3: VCF Stats (SURVIVOR + bcftools)
 
 ### Commands
 
-Description: Summarize SVs of each type and size for the whole genome and for chr9 alone. 
+Description: Summarize SVs of each type and size for the whole genome and for chr9 alone. Also get bcftools stats for these and for the lab's chr9 calls. 
 
 ```bash
 #!/usr/bin/env bash
@@ -167,6 +167,10 @@ grep "^AppSpring_1.0.0_Hap1_Chr09" $VCF >> $OUT/CherBrave3.wg.chr9_only.vcf
 
 SURVIVOR stats $VCF -1 -1 -1 $OUT/CherBrave3.wg.vcf.stats.txt
 SURVIVOR stats $OUT/CherBrave3.wg.chr9_only.vcf -1 -1 -1 $OUT/CherBrave3.wg.chr9_only.vcf.stats.txt
+
+bcftools stats $VCF > $OUT/CherBrave3.wg.bcftools_stats.txt
+bcftools stats $OUT/CherBrave3.wg.chr9_only.vcf > $OUT/CherBrave3.wg.chr9_only.bcftools_stats.txt
+bcftools stats data/lab_chr9_baseline/CherBrave3.vcf > $OUT/CherBrave3.lab_chr9.bcftools_stats.txt
 ```
 
 ### Results
@@ -174,6 +178,21 @@ SURVIVOR stats $OUT/CherBrave3.wg.chr9_only.vcf -1 -1 -1 $OUT/CherBrave3.wg.chr9
 VCF stats: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/3_vcf_stats/CherBrave3.wg.vcf.stats.txt`
 
 Chr9-only VCF stats: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/3_vcf_stats/CherBrave3.wg.chr9_only.vcf.stats.txt`
+
+bcftools stats, whole genome: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/3_vcf_stats/CherBrave3.wg.bcftools_stats.txt`
+
+bcftools stats, chr9 only: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/3_vcf_stats/CherBrave3.wg.chr9_only.bcftools_stats.txt`
+
+bcftools stats, lab chr9 calls: `/lustre/isaac24/proj/UTK0505/bnsoh/test3/results/3_vcf_stats/CherBrave3.lab_chr9.bcftools_stats.txt`
+
+Lab chr9 SURVIVOR stats (course-provided lab run): `/lustre/isaac24/proj/UTK0505/module3_data/analyses/03_cutesv/CherBrave3.vcf.stats.txt`
+
+| bcftools stats | Whole genome | Lab, chr9-only reference | Whole genome, chr9 only |
+| --- | --- | --- | --- |
+| Records | 77,345 | 30,095 | 6,077 |
+| SNPs | 0 | 0 | 0 |
+| Indels (DEL + INS) | 74,539 | 29,362 | 5,954 |
+| Others (DUP + INV) | 471 | 733 | 31 |
 
 Whole genome:
 
@@ -316,6 +335,9 @@ From `/lustre/isaac24/proj/UTK0505/bnsoh/test3` (`tree -I multiqc_data`):
 │   │   ├── CherBrave3.wg.vcf
 │   │   └── workdir
 │   ├── 3_vcf_stats
+│   │   ├── CherBrave3.lab_chr9.bcftools_stats.txt
+│   │   ├── CherBrave3.wg.bcftools_stats.txt
+│   │   ├── CherBrave3.wg.chr9_only.bcftools_stats.txt
 │   │   ├── CherBrave3.wg.chr9_only.vcf
 │   │   ├── CherBrave3.wg.chr9_only.vcf.stats.txt
 │   │   ├── CherBrave3.wg.chr9_only.vcf.stats.txt_CHR
@@ -333,5 +355,5 @@ From `/lustre/isaac24/proj/UTK0505/bnsoh/test3` (`tree -I multiqc_data`):
     ├── 02_call_svs.sh
     ├── 03_vcf_stats.sh
     └── 04_compare_chr9.sh
-12 directories, 33 files
+12 directories, 36 files
 ```
